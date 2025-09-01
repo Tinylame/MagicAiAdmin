@@ -1,0 +1,76 @@
+.Menu{
+  width: 100%;
+  height: 100%;
+  background: #001529;
+  .Title{
+    width: 100%;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    padding-left: 20px;
+    overflow: visible;
+    cursor: pointer;
+    
+    h1 {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      margin: 0;
+      animation: titleEnter 0.4s ease-out;
+    }
+    
+    .magicText {
+      transform-origin: center;
+      animation: textEnter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .magicLogo {
+      transform-origin: center;
+      animation: logoEnter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  }
+  
+  // 当菜单收起时，让logo居中
+  &[data-collapsed="true"] .Title {
+    justify-content: center;
+    padding-left: 0;
+  }
+}
+
+@keyframes titleEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.8) rotate(-180deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes textEnter {
+  from {
+    opacity: 0;
+    transform: translateX(-20px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes logoEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.3) rotate(360deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(180deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}

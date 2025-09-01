@@ -1,0 +1,26 @@
+.Merchant{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .Title{
+      height: 30px;
+  
+      h1{
+        font-size: 18px;
+      }
+    }
+    .Table{
+      width: 100%;
+      flex: 1;
+    }
+    .Search{
+      width: 100%;
+      height: 30px;
+    }
+    .Pagination{
+      width: 100%;
+      height: 30px;
+    }
+  }

@@ -1,0 +1,23 @@
+@use './font.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* 确保边框和内边距被包含在宽高内 */
+}
+
+html, body, #root {
+  height: 100vh; 
+  width: 100vw;
+
+
+}
+.RollingBar{
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 0;
+
+  }
+
+
+}

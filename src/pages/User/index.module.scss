@@ -1,0 +1,92 @@
+.Users{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  .Title{
+    height: 30px;
+
+    h1{
+      font-size: 18px;
+    }
+  }
+  .Table{
+    width: 100%;
+    flex: 1;
+  }
+  .Search{
+    width: 100%;
+    height: 30px;
+  }
+  .Pagination{
+    width: 100%;
+    height: 30px;
+  }
+
+}
+.DrawerStyle{
+  width: 100% ; 
+  height: 100%;
+  border-radius: 10px;
+  .DrawerStyleTitle{
+    height: 40px;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    background: #eae9e9;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    h1{
+      font-size: 18px;
+    }
+  }
+  .Content{
+    width: 100%;
+    height: calc(100% - 40px);
+    border: 1px solid #eae9e9;
+    border-radius: 0 0 10px 10px;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      width: 0;
+
+    }
+    .NoUser,.HaveUser{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      img{
+        width: 300px;
+        height: auto;
+      }
+      h1{
+        font-size: 18px;
+      }
+    }
+    .HaveUser{
+      justify-content: flex-start;
+      gap: 10px;
+      padding: 10px;
+      .userList{
+        width: 100%;
+        .UserItem{
+          width: 100%;
+          height: 80px;
+          background: #ffffff;
+          border-radius: 8px;
+          cursor: pointer;
+          box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.04) 0px 6px 6px -3px, rgba(14, 63, 126, 0.04) 0px 12px 12px -6px, rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
+          transition: transform 0.3s ease;
+          padding: 10px;
+        }
+        .UserItem:hover{
+          transform:scale(1.01)
+        }
+      }
+    }
+  }
+
+}
