@@ -84,5 +84,12 @@ export const MenuMagic =[
         key:'/feedback',
         title:'意见反馈',
         icon:'MessageOutlined'
+    },
+    {
+        label:'导出抖音数据',
+        key:'/dyData',
+        title:'导出抖音数据',
+        icon:'TikTokOutlined'
     }
+
 ]

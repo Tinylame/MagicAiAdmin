@@ -13,6 +13,7 @@ import Merchant from "@pages/Merchant";
 import Feedback from "@pages/Feedback";
 import RequireAuth from './RequireAuth.jsx'
 import NProgress from '../utils/nprogress';
+import DyData from '@pages/DyData';
 import React from 'react';
 
 // 包装组件，在组件挂载时显示进度条
@@ -80,6 +81,10 @@ const router = createHashRouter([
             {
                 path: "/feedback",
                 element: React.createElement(withProgress(Feedback)),
+            },
+            {
+                path: "/dyData",
+                element: React.createElement(withProgress(DyData)),
             }
         ]
     },

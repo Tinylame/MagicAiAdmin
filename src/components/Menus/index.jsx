@@ -91,7 +91,6 @@ const Menus = () => {
                 inlineCollapsed={isTitle}
                 theme="dark"
                 mode="inline"
-                style={{marginTop:'10px'}}
                 onClick={handleClick}
                 selectedKeys={[location.pathname]}
                 openKeys={openKeys}

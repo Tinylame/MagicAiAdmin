@@ -2,9 +2,11 @@ import '@ant-design/v5-patch-for-react-19';
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles/index.scss'
+import './styles/tailwind.css'
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from '@store/store';
+
 
 import App from './App.jsx'
 
