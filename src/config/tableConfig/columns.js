@@ -299,11 +299,92 @@ const feedbackTable =[
         fixed: 'right'
     }
 ]
+const invitationCode =[
+    {
+        title: '企业名称',
+        dataIndex: 'companyName',
+        key: 'companyName',
+        fixed: 'left'
+    },
+    {
+        title: '手机号',
+        dataIndex: 'contactPhone',
+        key: 'contactPhone',
+    },
+    {
+        title: '联系人姓名',
+        dataIndex: 'contactName',
+        key: 'contactName',
+    },
+    {
+        title: '行业',
+        dataIndex: 'industry',
+        key: 'industry',
+    },
+    {
+        title: '主要使用场景或需求',
+        dataIndex: 'usageScenario',
+        key: 'usageScenario',
+    },
+    {
+        title: '状态,',
+        dataIndex: 'status',
+        key: 'status',
+    },
+    {
+        title: '拒绝原因',
+        dataIndex: 'rejectReason',
+        key: 'rejectReason',
+    },
+    {
+        title: '邀请码',
+        dataIndex: 'inviteCode',
+        key: 'inviteCode'
+    },
+    {
+        title: '是否被使用',
+        dataIndex: 'isUsed',
+        key: 'isUsed'
+    },
+    {
+        title: '使用邀请码的手机号',
+        dataIndex: 'usedPhone',
+        key: 'usedPhone'
+    },
+    {
+        title: '使用时间',
+        dataIndex: 'usedAt',
+        key: 'usedAt'
+    },
+    {
+        title: '创建时间',
+        dataIndex: 'createdAt',
+        key: 'createdAt'
+    },
+    {
+        title: '更新时间',
+        dataIndex: 'updatedAt',
+        key: 'updatedAt',
+    },
+    {
+        title: '审核时间',
+        dataIndex: 'approvedAt',
+        key: 'approvedAt'
+    },
+    {
+        title: '操作',
+        dataIndex: 'action',
+        key: 'action',
+        fixed: 'right'
+    }
+    
+]
 export const TableConfig ={
     user,
     merchant,
     recharge,
     withdrawal,
     cost,
-    feedbackTable
+    feedbackTable,
+    invitationCode
 }

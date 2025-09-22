@@ -90,6 +90,12 @@ export const MenuMagic =[
         key:'/dyData',
         title:'导出抖音数据',
         icon:'TikTokOutlined'
+    },
+    {
+        label:'邀请码管理',
+        key:'/invitationCode',
+        title:'邀请码管理',
+        icon:'CodeOutlined'
     }
 
 ]

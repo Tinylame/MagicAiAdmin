@@ -14,7 +14,9 @@ const User = () => {
     const { userAll,getInviteList } = Users
     const [open, setOpen] = useState(false);
     const [userInfo, setUserInfo] = useState([])
+    const [DtotalCount,setDtotalCount] = useState(0)
     const [Title,setTitle] = useState("")
+    const [currentUserId, setCurrentUserId] = useState(null)
     const [requestdata, setRequestdata] = useState(
         {
             pageIndex: 1,
@@ -76,6 +78,8 @@ const User = () => {
         if (res.code === 200){
             setTitle(record.phoneNumber)
             setUserInfo(res.data.list||[])
+            setDtotalCount(res.data.total)
+            setCurrentUserId(record.userId) // 存储当前选中的用户ID
             console.log(res.data.list)
             setOpen(true);
         }else {
@@ -104,6 +108,47 @@ const User = () => {
         console.log('新的请求参数:', newRequestData)
     }
 
+    // 处理抽屉内邀请用户列表的分页变化
+    const handleDrawerPaginationChange = async (page, pageSize) => {
+        console.log('抽屉分页变化:', page, pageSize);
+        
+        if (currentUserId) {
+            try {
+                const res = await getInviteList({
+                    pageIndex: page,
+                    pageSize: pageSize,
+                    userId: currentUserId
+                });
+                
+                if (res.code === 200) {
+                    setUserInfo(res.data.list || []);
+                    setDtotalCount(res.data.total);
+                } else {
+                    messageApi.error('获取邀请用户列表失败');
+                }
+            } catch (error) {
+                console.error('获取邀请用户列表出错:', error);
+                messageApi.error('获取邀请用户列表出错');
+            }
+        }
+    }
+    const DrawerList =[
+        {
+            title: '用户昵称',
+            dataIndex: 'nickName',
+            key: 'nickName'
+        },
+        {
+            title: '用户手机号',
+            dataIndex: 'phoneNumber',
+            key: 'phoneNumber'
+        },
+        {
+            title: '创建时间',
+            dataIndex: 'createdAt',
+            key: 'createdAt'
+        },
+    ]
     return (
         <div className={UserStyle.Users}>
             {contextHolder}
@@ -142,13 +187,23 @@ const User = () => {
                          <img src={NoUser} alt='没有数据'/>
                          <h1>没有邀请用户</h1>
                      </div> : <div className={UserStyle.HaveUser}>
-                         {userInfo.map(item => (
-                             <div key={item.id} className={UserStyle.userList}>
-                                <div className={UserStyle.UserItem}>
-                                    <p>昵称：{item.nickName}</p>
-                                </div>
-                             </div>
-                         ))}
+                         {/*{userInfo.map(item => (*/}
+                         {/*    <div key={item.id} className={UserStyle.userList}>*/}
+                         {/*       <div className={UserStyle.UserItem}>*/}
+                         {/*           <p>昵称：{item.nickName}</p>*/}
+                         {/*       </div>*/}
+                         {/*    </div>*/}
+                         {/*))}*/}
+                         <div className='flex-1'>
+                             <MagicTable
+                                 tableColumns={DrawerList}
+                                 tableData={userInfo}
+                             />
+                         </div>
+                         <div className='h-[60px]'>
+                             <MagicPagination total={DtotalCount} defaultPageSize={requestdata.pageSize} onChange={handleDrawerPaginationChange} />
+                         </div>
+
                      </div>}
                  </div>
              </div>
