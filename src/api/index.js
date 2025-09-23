@@ -5,6 +5,8 @@ import {Transaction} from './Transaction.js'
 import {Settings} from './Settings.js'
 import {FeedBacks} from './feedBack.js'
 import {dyData} from './dyApi.js'
+import {invoice} from "./invoice.js";
+
 export {
     Logins,
     Homes,
@@ -12,5 +14,6 @@ export {
     Transaction,
     Settings,
     FeedBacks,
-    dyData
+    dyData,
+    invoice
 }

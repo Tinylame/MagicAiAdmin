@@ -5,9 +5,9 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [react(),tailwindcss()],
   server: {
-		port: 6001,
-		host: true,
-	},
+	port: 6001,
+	host: true,
+},
   resolve: {
     alias: {
       '@': '/src',
@@ -17,4 +17,28 @@ export default defineConfig({
       '@store':'/src/store'
     },
   },
+  optimizeDeps: {
+    exclude: [
+      '@tailwindcss/vite'
+    ],
+    include: [
+      'react',
+      'react-dom',
+      'antd',
+      'axios',
+      'echarts',
+      '@ant-design/icons'
+    ]
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          antd: ['antd', '@ant-design/icons'],
+          utils: ['axios', 'echarts']
+        }
+      }
+    }
+  }
 })

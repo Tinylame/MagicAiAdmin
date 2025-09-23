@@ -379,6 +379,76 @@ const invitationCode =[
     }
     
 ]
+
+const invoiceTable=[
+    {
+        title: '发票订单号',
+        dataIndex: 'invoiceNo',
+        key: 'invoiceNo',
+        fixed: 'left'
+    },
+    {
+        title: '充值订单总数量',
+        dataIndex: 'rechargeCount',
+        key: 'rechargeCount',
+    },
+    {
+        title: '公司名字',
+        dataIndex: 'invoiceTitle',
+        key: 'invoiceTitle',
+    },
+    {
+        title: '发票金额',
+        dataIndex: 'invoiceAmount',
+        key: 'invoiceAmount',
+    },
+    {
+        title: '商品名称',
+        dataIndex: 'invoiceContent',
+        key: 'invoiceContent',
+    },
+    {
+        title: '状态',
+        dataIndex: 'status',
+        key: 'status',
+    },
+    {
+        title: '拒绝原因',
+        dataIndex: 'rejectReason',
+        key: 'rejectReason',
+    },
+    {
+        title: '发票下载地址',
+        dataIndex: 'invoiceFileUrl',
+        key: 'invoiceFileUrl',
+    },
+    {
+        title: '申请时间',
+        dataIndex: 'createTime',
+        key: 'createTime',
+    },
+    {
+        title: '审核时间',
+        dataIndex: 'auditTime',
+        key: 'auditTime',
+    },
+    {
+        title: '开票时间',
+        dataIndex: 'invoiceTime',
+        key: 'invoiceTime',
+    },
+    {
+        title: '备注',
+        dataIndex: 'remark',
+        key: 'remark',
+    },
+    {
+        title: '操作',
+        dataIndex: 'action',
+        key: 'action',
+        fixed: 'right'
+    }
+]
 export const TableConfig ={
     user,
     merchant,
@@ -386,5 +456,6 @@ export const TableConfig ={
     withdrawal,
     cost,
     feedbackTable,
-    invitationCode
+    invitationCode,
+    invoiceTable
 }
