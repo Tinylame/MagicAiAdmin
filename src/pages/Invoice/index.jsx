@@ -49,13 +49,13 @@ const Invoice = () => {
 
     // 通过发票申请
     const handleApprove = (record) => {
-        setCurrentInvoiceId(record.invoiceId);
+        setCurrentInvoiceId(record.id);
         setIsTongGuo(true);
     }
 
     // 拒绝发票申请
     const handleReject = (record) => {
-        setCurrentInvoiceId(record.invoiceId);
+        setCurrentInvoiceId(record.id);
         setIsJuJue(true);
     }
 
@@ -181,6 +181,22 @@ const Invoice = () => {
 
                     }
                 }
+            }
+        }
+        if(item.key === 'invoiceFileUrl'){
+            return {
+                ...item,
+                render: (value, record) => (
+                    <div className='flex gap-[10px] w-[150px]'>
+                        <a 
+                            href={value} 
+                            className='truncate block max-w-full hover:text-blue-600 text-blue-500 underline'
+                            title={value}
+                        >
+                            {value}
+                        </a>
+                    </div>
+                )
             }
         }
         return item
