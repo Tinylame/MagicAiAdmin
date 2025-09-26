@@ -23,6 +23,12 @@ export const MenuMagic =[
                 key:'/merchant',
                 title:'商户管理',
                 icon:'ShopOutlined'
+            },
+            {
+                label:'认证管理',
+                key:'/certification',
+                title:'认证管理',
+                icon:'AuditOutlined'
             }
         ]
     },

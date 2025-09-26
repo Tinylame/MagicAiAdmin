@@ -6,6 +6,7 @@ import {Settings} from './Settings.js'
 import {FeedBacks} from './feedBack.js'
 import {dyData} from './dyApi.js'
 import {invoice} from "./invoice.js";
+import {enterpriseVerify} from "./enterpriseVerify.js";
 
 export {
     Logins,
@@ -15,5 +16,6 @@ export {
     Settings,
     FeedBacks,
     dyData,
-    invoice
+    invoice,
+    enterpriseVerify
 }

@@ -449,6 +449,57 @@ const invoiceTable=[
         fixed: 'right'
     }
 ]
+
+const certificateTable=[
+    {
+        title: '商户id',
+        dataIndex: 'businessId',
+        key: 'businessId',
+        fixed: 'left'
+    },
+    {
+        title: '法人信息',
+        dataIndex: 'legalPersonName',
+        key: 'legalPersonName',
+        fixed: 'left'
+    },
+    {
+        title: '认证申请单号',
+        dataIndex: 'verificationNo',
+        key: 'verificationNo',
+    },
+    {
+        title: '证件类型',
+        dataIndex: 'certificateType',
+        key: 'certificateType',
+    },
+    {
+        title: '证件类型',
+        dataIndex: 'certificateType',
+        key: 'certificateType',
+    },
+    {
+        title: '企业名称',
+        dataIndex: 'companyName',
+        key: 'companyName',
+    },
+    {
+        title: '统一社会信用代码',
+        dataIndex: 'unifiedSocialCreditCode',
+        key: 'unifiedSocialCreditCode',
+    },
+    {
+        title: '详情',
+        dataIndex: 'ForDetails',
+        key: 'ForDetails',
+    },
+
+    {
+        title: '操作',
+        dataIndex: 'action',
+        key: 'action',
+    },
+]
 export const TableConfig ={
     user,
     merchant,
@@ -457,5 +508,6 @@ export const TableConfig ={
     cost,
     feedbackTable,
     invitationCode,
-    invoiceTable
+    invoiceTable,
+    certificateTable
 }

@@ -16,6 +16,7 @@ import NProgress from '../utils/nprogress';
 import DyData from '@pages/DyData';
 import React from 'react';
 import InvitationCode from "@pages/InvitationCode";
+import Certification from "@pages/Certification";
 
 // 包装组件，在组件挂载时显示进度条
 const withProgress = (Component) => {
@@ -90,7 +91,12 @@ const router = createHashRouter([
             {
                 path: "/invitationCode",
                 element: React.createElement(withProgress(InvitationCode)),
+            },
+            {
+                path: "/Certification",
+                element: React.createElement(withProgress(Certification)),
             }
+
         ]
     },
     {
