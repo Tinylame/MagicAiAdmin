@@ -22,6 +22,12 @@ const Withdrawal = () => {
             pageIndex: 1,
             pageSize: 10,
         })
+
+    // 输入框了列表
+    const [fromDate, setFromDate] = useState({
+        withdrawNo:'',
+        phoneNumber:''
+    })
     //是否显示通过对话框
     const [isTongGuo,setIsTongGuo] = useState(false)
     const [isJuJue ,setIsJuJue] = useState(false)
@@ -47,13 +53,41 @@ const Withdrawal = () => {
         fetchWithdrawalData(requestdata)
     }, [requestdata])
 
-    const handleSearch = (value) => {
-        if (value.target.value) {
-            fetchWithdrawalData({ tradeNo: value.target.value })
-        } else {
-            fetchWithdrawalData(requestdata)
-        }
-    }
+    // 处理订单号输入框变化
+    const handleWithdrawNoChange = (e) => {
+        const value = e.target.value;
+        const newFromDate = {
+            ...fromDate,
+            withdrawNo: value
+        };
+        setFromDate(newFromDate);
+        
+        // 构建搜索参数
+        const searchParams = {
+            ...requestdata,
+            tradeNo: value,
+            phoneNumber: fromDate.phoneNumber
+        };
+        fetchWithdrawalData(searchParams);
+    };
+
+    // 处理手机号输入框变化
+    const handlePhoneNumberChange = (e) => {
+        const value = e.target.value;
+        const newFromDate = {
+            ...fromDate,
+            phoneNumber: value
+        };
+        setFromDate(newFromDate);
+        
+        // 构建搜索参数
+        const searchParams = {
+            ...requestdata,
+            tradeNo: fromDate.withdrawNo,
+            phoneNumber: value
+        };
+        fetchWithdrawalData(searchParams);
+    };
 
 
     function Through(record){
@@ -190,27 +224,55 @@ const Withdrawal = () => {
         setThroughId([])
         setSelectedRowKeys([])
     }
-    async function handleExport() {
-
+    // 导出全部数据
+    async function handleExportAll() {
         try {
-            const res = await withdrawharge(requestdata)
-            // requestdata
+            const exportData = {
+                ...requestdata
+            }
+            const res = await withdrawharge(exportData)
             const blob = res.data
             console.log(blob);
             // 创建下载链接
             const url = window.URL.createObjectURL(blob)
             const link = document.createElement('a')
             link.href = url
-            link.download = '提现数据.xlsx'
+            link.download = '提现数据_全部.xlsx'
             document.body.appendChild(link)
             link.click()
             document.body.removeChild(link)
             window.URL.revokeObjectURL(url)
         } catch (e) {
             messageApi.error('导出失败');
-
         }
     }
+
+    // 导出当前页数据
+    async function handleExportCurrentPage() {
+        try {
+            const exportData = {
+                pageIndex: requestdata.pageIndex,
+                pageSize: requestdata.pageSize,
+                tradeNo: fromDate.withdrawNo,  // 传递订单号
+                phoneNumber: fromDate.phoneNumber  // 传递手机号
+            }
+            const res = await withdrawharge(exportData)
+            const blob = res.data
+            console.log(blob);
+            // 创建下载链接
+            const url = window.URL.createObjectURL(blob)
+            const link = document.createElement('a')
+            link.href = url
+            link.download = `提现数据_第${requestdata.pageIndex}页.xlsx`
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link)
+            window.URL.revokeObjectURL(url)
+        } catch (e) {
+            messageApi.error('导出失败');
+        }
+    }
+
 
     // 批量通过提现
     function handleBatchThrough() {
@@ -241,8 +303,10 @@ const Withdrawal = () => {
                 <h1>提现管理</h1>
             </div>
             <div className={WithdrawalStyle.Search}>
-                <Input placeholder="请输入订单号" style={{ width: '200px' }} onPressEnter={handleSearch} />
-                <Button onClick={handleExport}>导出数据</Button>
+                <Input placeholder="请输入订单号" style={{ width: '200px' }} onChange={handleWithdrawNoChange} value={fromDate.withdrawNo}/>
+                <Input placeholder="请输入手机号" style={{ width: '200px' }} onChange={handlePhoneNumberChange} value={fromDate.phoneNumber}/>
+                <Button onClick={handleExportAll}>全部导出</Button>
+                <Button onClick={handleExportCurrentPage} disabled={!fromDate.withdrawNo && !fromDate.phoneNumber}>导出搜索数据</Button>
                 <Button color="cyan" variant="outlined" onClick={handleBatchThrough} disabled={ThroughId.length === 0}>批量通过</Button>
             </div>
             <div className={WithdrawalStyle.Table}>
