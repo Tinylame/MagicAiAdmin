@@ -458,10 +458,15 @@ const certificateTable=[
         fixed: 'left'
     },
     {
+        title: '企业名称',
+        dataIndex: 'companyName',
+        key: 'companyName',
+        fixed: 'left'
+    },
+    {
         title: '法人信息',
         dataIndex: 'legalPersonName',
-        key: 'legalPersonName',
-        fixed: 'left'
+        key: 'legalPersonName'
     },
     {
         title: '认证申请单号',
@@ -478,26 +483,30 @@ const certificateTable=[
         dataIndex: 'certificateType',
         key: 'certificateType',
     },
-    {
-        title: '企业名称',
-        dataIndex: 'companyName',
-        key: 'companyName',
-    },
+
     {
         title: '统一社会信用代码',
         dataIndex: 'unifiedSocialCreditCode',
         key: 'unifiedSocialCreditCode',
     },
     {
+        title: '审核状态',
+        dataIndex: 'status',
+        key: 'status',
+    },
+
+    {
         title: '详情',
         dataIndex: 'ForDetails',
         key: 'ForDetails',
+        fixed: 'right'
     },
 
     {
         title: '操作',
         dataIndex: 'action',
         key: 'action',
+        fixed: 'right'
     },
 ]
 export const TableConfig ={

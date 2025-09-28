@@ -18,10 +18,6 @@ function DyData() {
                 pageSize: 10000
             })
             
-            console.log('完整响应:', response)
-            console.log('响应数据类型:', typeof response)
-            console.log('response.data 类型:', typeof response?.data)
-            console.log('response.data 是否为 Blob:', response?.data instanceof Blob)
             
             let blob;
             
@@ -38,10 +34,8 @@ function DyData() {
                 console.log('response.data 是字符串，尝试转换为 Blob')
                 blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
             } else {
-                console.error('无法处理响应数据:', response)
-                console.error('响应数据类型:', typeof response)
-                console.error('response.data 类型:', typeof response?.data)
-                alert('导出失败：数据格式错误')
+                message.destroy(); // 清除加载消息
+                message.error('导出失败：数据格式错误')
                 return
             }
             

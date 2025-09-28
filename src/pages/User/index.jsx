@@ -75,11 +75,14 @@ const User = () => {
                 pageSize: 10,
                 userId:record.userId
             })
+            console.log(res);
+            
         if (res.code === 200){
             setTitle(record.phoneNumber)
             setUserInfo(res.data.list||[])
-            setDtotalCount(res.data.total)
-            setCurrentUserId(record.userId) // 存储当前选中的用户ID
+            setDtotalCount(res.data.totalCount)
+            console.log(res.data.total)
+            setCurrentUserId(record.userId) 
             console.log(res.data.list)
             setOpen(true);
         }else {
@@ -122,7 +125,8 @@ const User = () => {
                 
                 if (res.code === 200) {
                     setUserInfo(res.data.list || []);
-                    setDtotalCount(res.data.total);
+                    setDtotalCount(res.data.totalCount);
+                    console.log(res.data.total)
                 } else {
                     messageApi.error('获取邀请用户列表失败');
                 }
