@@ -26,7 +26,8 @@ const Withdrawal = () => {
     // 输入框了列表
     const [fromDate, setFromDate] = useState({
         withdrawNo:'',
-        phoneNumber:''
+        phoneNumber:'',
+        amount:''
     })
     //是否显示通过对话框
     const [isTongGuo,setIsTongGuo] = useState(false)
@@ -88,7 +89,22 @@ const Withdrawal = () => {
         };
         fetchWithdrawalData(searchParams);
     };
-
+    const handleMoneyChange = (e) => {
+        const value = e.target.value;
+        const newFromDate = {
+            ...fromDate,
+            amount: value
+        };
+        setFromDate(newFromDate);
+        // 构建搜索参数
+        const searchParams = {
+            ...requestdata,
+            tradeNo: fromDate.withdrawNo,
+            phoneNumber: fromDate.phoneNumber,
+            amount: value
+        };
+        fetchWithdrawalData(searchParams);
+    }
 
     function Through(record){
         setThroughId([...ThroughId,record.id])
@@ -162,6 +178,7 @@ const Withdrawal = () => {
 
 
     }
+    
     async function handleOk(){
 
         let params = {
@@ -254,7 +271,8 @@ const Withdrawal = () => {
                 pageIndex: requestdata.pageIndex,
                 pageSize: requestdata.pageSize,
                 tradeNo: fromDate.withdrawNo,  // 传递订单号
-                phoneNumber: fromDate.phoneNumber  // 传递手机号
+                phoneNumber: fromDate.phoneNumber,  // 传递手机号
+                amount: fromDate.amount  // 传递金额
             }
             const res = await withdrawharge(exportData)
             const blob = res.data
@@ -305,8 +323,9 @@ const Withdrawal = () => {
             <div className={WithdrawalStyle.Search}>
                 <Input placeholder="请输入订单号" style={{ width: '200px' }} onChange={handleWithdrawNoChange} value={fromDate.withdrawNo}/>
                 <Input placeholder="请输入手机号" style={{ width: '200px' }} onChange={handlePhoneNumberChange} value={fromDate.phoneNumber}/>
+                <Input placeholder="请输入金额" style={{ width: '200px' }} onChange={handleMoneyChange} value={fromDate.amount}/>
                 <Button onClick={handleExportAll}>全部导出</Button>
-                <Button onClick={handleExportCurrentPage} disabled={!fromDate.withdrawNo && !fromDate.phoneNumber}>导出搜索数据</Button>
+                <Button onClick={handleExportCurrentPage} disabled={!fromDate.withdrawNo && !fromDate.phoneNumber && !fromDate.amount}>导出搜索数据</Button>
                 <Button color="cyan" variant="outlined" onClick={handleBatchThrough} disabled={ThroughId.length === 0}>批量通过</Button>
             </div>
             <div className={WithdrawalStyle.Table}>

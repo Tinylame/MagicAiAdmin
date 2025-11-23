@@ -92,8 +92,8 @@ const Conventional = () => {
             return {
                 ...column,
                 render: (value, record) =>{
-                    if (record.configKey === 'register_coin_switch' || record.configKey === 'promote_new_switch') {
-                        return (<></>)
+                    if (record.fieldType ===2) {
+                        return (<Switch checked={record.configValue==='true'} onChange={()=>setSwitchValue(record)}/>)
                     }else {
                         return (
                             <Button color="cyan" variant="outlined" size="small" onClick={() => showModal(record)} >
@@ -108,8 +108,8 @@ const Conventional = () => {
             return {
                 ...column,
                 render: (value, record) =>{
-                    if (value === 'true' || value === 'false') {
-                        return (<Switch checked={value==='true'} onChange={()=>setSwitchValue(record)}/>)
+                    if (record.fieldType ===2) {
+                        return (<p>-</p>)
                     }else {
                         return (
                            <p>{value}</p>
@@ -134,7 +134,7 @@ const Conventional = () => {
             </div>
             <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} okText="修改" cancelText="取消">
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', padding: '20px' }}>
-                    <h1 style={{ fontSize: '16px', fontWeight: 'bold' }}> 费用的值</h1>
+                    <h1 style={{ fontSize: '16px', fontWeight: 'bold' }}>请输入新值</h1>
                     <Input placeholder={
                         currentConfigKey === 'invite_reward_rate' || currentConfigKey === 'commission_rate' 
                             ? '请输入0-1之间的数值，最多保留两位小数' 

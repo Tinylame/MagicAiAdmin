@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import DyDataStyle from './index.module.sass'
 import {dyData} from "@/api/index.js";
 import {Button, message} from "antd";
 

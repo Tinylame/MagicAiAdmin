@@ -160,7 +160,7 @@ const User = () => {
                 <h1>用户管理</h1>
             </div>
             <div className={UserStyle.Search}>
-                <Input placeholder="请输入用户手机号" style={{ width: '200px' }} onPressEnter={handleSearch} />
+                <Input placeholder="请输入用户手机号" style={{ width: '200px' }} onChange={handleSearch} />
             </div>
             <div className={UserStyle.Table} >
                 <MagicTable

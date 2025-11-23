@@ -139,7 +139,7 @@ const Recharge = () => {
                 <h1>充值管理</h1>
             </div>
             <div className={RechargeStyle.Search}>
-                <Input placeholder="请输入订单号" style={{width: '200px'}} onPressEnter={handleSearch}/>
+                <Input placeholder="请输入订单号" style={{width: '200px'}} onChange={handleSearch}/>
                 <Button onClick={handleExport}>导出数据</Button>
             </div>
             <div className={RechargeStyle.Table}>

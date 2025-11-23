@@ -198,7 +198,7 @@ const InvitationCode = () => {
                 <h1>邀请码管理</h1>
             </div>
             <div className={InvitationCodeStyle.Search}>
-                <Input placeholder="请输入手机号" style={{ width: '200px' }} onPressEnter={handleSearch} />
+                <Input placeholder="请输入手机号" style={{ width: '200px' }} onChange={handleSearch} />
             </div>
             <div className={InvitationCodeStyle.Table}>
                 <MagicTable 

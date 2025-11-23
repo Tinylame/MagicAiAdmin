@@ -84,7 +84,7 @@ const Merchant = () => {
                 <h1>商户管理</h1>
             </div>
             <div className={MerchantStyle.Search}>
-                <Input placeholder="请输入商户手机号" style={{width: '200px'}} onPressEnter={handleSearch}/>
+                <Input placeholder="请输入商户手机号" style={{width: '200px'}} onChange={handleSearch}/>
             </div>
             <div className={MerchantStyle.Table}>
                 <MagicTable tableColumns={userColumnsWithActions} tableData={tableData} />
