@@ -35,7 +35,7 @@ const Invoice = () => {
 
         const {data} = await getInvoiceList(requestData);
         setRows(data.list)
-        setTotal(data.total)
+        setTotal(data.totalCount)
     }
     const toPersonal=async (value)=>{
         setInvoiceType(value)

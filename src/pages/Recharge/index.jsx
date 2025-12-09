@@ -28,7 +28,6 @@ const Recharge = () => {
         console.log(res)
         const {data:{list},data:{totalCount}}=res
         setTableData(list)
-        console.log(list)
         setTotal(totalCount)
     }
 

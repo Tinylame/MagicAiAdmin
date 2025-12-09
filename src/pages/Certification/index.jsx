@@ -1,24 +1,23 @@
-import React, {useEffect,useState} from 'react';
-import {enterpriseVerify} from '@/api'
-import { TableConfig } from '@/config'
-import {Input, Button, Drawer, Descriptions, Image, Tag, Space, Typography, Modal, message} from 'antd'
+import React, { useEffect, useState } from 'react';
+import { enterpriseVerify } from '@/api'
+import { Input, Button, Drawer, Modal, message } from 'antd'
 import MagicTable from "@components/MagicTable";
 import MagicPagination from "@components/MagicPagination/index.jsx";
 import { InfoCircleFilled } from '@ant-design/icons'
-
+import { tableTitle } from './tableTitle.jsx'
+import CertificationDetail from './CertificationDetail.jsx'
 function Certification(props) {
-    const {certificateTable}=TableConfig
     const [messageApi, contextHolder] = message.useMessage();
 
     const [isDrawerOpen, setDrawerOpen] = useState(false)
     const [total, setTotal] = useState(0)
     const [selectedRecord, setSelectedRecord] = useState(null)
-    
+
     // 搜索相关状态
     const [searchForm, setSearchForm] = useState({
         companyName: ''
     })
-    
+
     // 审核相关状态
     const [isTongGuo, setIsTongGuo] = useState(false)
     const [isJuJue, setIsJuJue] = useState(false)
@@ -102,67 +101,9 @@ function Certification(props) {
         setJujueContet('')
         setThroughId([])
     }
-    const tableTitle = certificateTable.map(item => {
-        if (item.dataIndex ==='action'){
-            return {
-                ...item,
-                render: (value, record) => (
-                    <div className='flex w-[100%] justify-center gap-[5px]'>
-                        <Button
-                            size="small"
-                            color="danger"
-                            variant="outlined"
-                            onClick={() => Refuse(record)}
-                            disabled={record.status !== 1}
-                        >
-                            拒绝
-                        </Button>
-                        <Button
-                            size="small"
-                            color="cyan"
-                            variant="outlined"
-                            onClick={() => Through(record)}
-                            disabled={record.status !== 1}
-                        >
-                            通过
-                        </Button>
-                    </div>
-                )
-            }
-        }
-        if (item.dataIndex ==='ForDetails'){
-            return {
-                ...item,
-                render: (value, record) => (
-                    <div className='flex w-[100%] justify-center gap-[5px]'>
-                        <Button
-                            size="small"
-                            color="cyan"
-                            variant="outlined"
-                            onClick={() => showDrawer(record)}
-                        >查看详情</Button>
-                    </div>
-                )
-            }
-        }
-        if (item.dataIndex ==='status'){
-            return {
-                ...item,
-                render: (value, record) => {
-                    switch (value) {
-                        case 1:
-                            return <Tag color="volcano">待审核</Tag>
-                        case 2:
-                            return <Tag color="green">审核成功</Tag>
-                        case 3:
-                            return <Tag color="red">审核失败</Tag>
-                    }
-                }
-            }
-        }
-        return item; // 返回未修改的项
-    })
-    const {enterpriseList,enterpriseAudit} = enterpriseVerify;
+
+
+    const { enterpriseList, enterpriseAudit } = enterpriseVerify;
     const [requestdata, setRequestdata] = useState(
         {
             pageIndex: 1,
@@ -171,7 +112,7 @@ function Certification(props) {
     const [enterpriseData, setEnterpriseData] = useState()
     const getEnterprise = async (dats) => {
         const res = await enterpriseList(dats);
-        const {data:{list},data:{totalCount}}=res
+        const { data: { list }, data: { totalCount } } = res
         setTotal(totalCount)
         setEnterpriseData(list)
     }
@@ -184,7 +125,7 @@ function Certification(props) {
             companyName: value
         };
         setSearchForm(newSearchForm);
-        
+
         // 构建搜索参数
         const searchParams = {
             ...requestdata,
@@ -192,9 +133,9 @@ function Certification(props) {
         };
         getEnterprise(searchParams);
     };
-    useEffect(()=>{
+    useEffect(() => {
         getEnterprise(requestdata)
-    },[requestdata])
+    }, [requestdata])
 
     const handlePaginationChange = (page, pageSize) => {
         console.log('分页变化:', page, pageSize);
@@ -217,21 +158,22 @@ function Certification(props) {
                 <h1 className='text-[18px]'>实名认证管理</h1>
             </div>
             <div className='w-[100%] h-[30px]'>
-                <Input 
-                    placeholder='请输入企业名称' 
-                    style={{width:'200px'}} 
+                <Input
+                    placeholder='请输入企业名称'
+                    style={{ width: '200px' }}
                     onChange={handleCompanyNameChange}
                     value={searchForm.companyName}
                 />
             </div>
             <div className='w-[100%] flex-1 '>
                 <MagicTable
-                    tableColumns={tableTitle}
+                    tableColumns={tableTitle(Refuse, Through, showDrawer)}
                     tableData={enterpriseData}
                 />
             </div>
             <div className='w-[100%] h-[30px] '>
-                <MagicPagination total={total} defaultPageSize={requestdata.pageSize} onChange={handlePaginationChange} />
+                <MagicPagination total={total} defaultPageSize={requestdata.pageSize}
+                    onChange={handlePaginationChange} />
             </div>
 
             <Drawer
@@ -240,87 +182,7 @@ function Certification(props) {
                 onClose={onClose}
                 width={800}
             >
-                {selectedRecord && (
-                    <div className="p-4">
-                        <Descriptions title="基本信息" bordered column={2} size="small">
-                            <Descriptions.Item label="认证ID">{selectedRecord.id}</Descriptions.Item>
-                            <Descriptions.Item label="商户ID">{selectedRecord.businessId}</Descriptions.Item>
-                            <Descriptions.Item label="认证申请单号">{selectedRecord.verificationNo}</Descriptions.Item>
-                            <Descriptions.Item label="证件类型">{selectedRecord.certificateTypeDesc}</Descriptions.Item>
-                            <Descriptions.Item label="企业名称" span={2}>{selectedRecord.companyName}</Descriptions.Item>
-                            <Descriptions.Item label="统一社会信用代码" span={2}>{selectedRecord.unifiedSocialCreditCode}</Descriptions.Item>
-                        </Descriptions>
-
-                        <Descriptions title="注册地址信息" bordered column={2} size="small" style={{ marginTop: 16 }}>
-                            <Descriptions.Item label="注册省份">{selectedRecord.registerProvince}</Descriptions.Item>
-                            <Descriptions.Item label="注册城市">{selectedRecord.registerCity}</Descriptions.Item>
-                            <Descriptions.Item label="注册区域">{selectedRecord.registerDistrict}</Descriptions.Item>
-                            <Descriptions.Item label="详细地址">{selectedRecord.registerDetailAddress}</Descriptions.Item>
-                        </Descriptions>
-
-                        <Descriptions title="法人信息" bordered column={2} size="small" style={{ marginTop: 16 }}>
-                            <Descriptions.Item label="法人姓名">{selectedRecord.legalPersonName}</Descriptions.Item>
-                            <Descriptions.Item label="身份证号码">{selectedRecord.legalPersonIdCard}</Descriptions.Item>
-                            <Descriptions.Item label="身份证正面" span={2}>
-                                {selectedRecord.legalPersonIdFrontUrl && (
-                                    <Image
-                                        width={100}
-                                        src={selectedRecord.legalPersonIdFrontUrl}
-                                        alt="身份证正面"
-                                        style={{ marginRight: 8,aspectRatio:'16/9',objectFit:'cover'}}
-                                    />
-                                )}
-                            </Descriptions.Item>
-                            <Descriptions.Item label="身份证反面" span={2}>
-                                {selectedRecord.legalPersonIdBackUrl && (
-                                    <Image
-                                        width={100}
-                                        src={selectedRecord.legalPersonIdBackUrl}
-                                        alt="身份证反面"
-                                        style={{ marginRight: 8,aspectRatio:'16/9',objectFit:'cover'}}
-                                    />
-                                )}
-                            </Descriptions.Item>
-                        </Descriptions>
-
-                        <Descriptions title="证件附件" bordered column={1} size="small" style={{ marginTop: 16 }}>
-                            <Descriptions.Item label="证件图片">
-                                {selectedRecord.certificateFileUrls && selectedRecord.certificateFileUrls.length > 0 ? (
-                                    <Space wrap>
-                                        {selectedRecord.certificateFileUrls.map((url, index) => (
-                                            <Image
-                                                key={index}
-                                                width={100}
-                                                src={url}
-                                                alt={`证件图片${index + 1}`}
-                                                style={{ marginRight: 8,aspectRatio:'16/9',objectFit:'cover'}}
-                                            />
-                                        ))}
-                                    </Space>
-                                ) : (
-                                    <Typography.Text type="secondary">暂无证件图片</Typography.Text>
-                                )}
-                            </Descriptions.Item>
-                        </Descriptions>
-
-                        <Descriptions title="审核信息" bordered column={2} size="small" style={{ marginTop: 16 }}>
-                            <Descriptions.Item label="审核状态">
-                                <Tag color={selectedRecord.status === 1 ? 'orange' : selectedRecord.status === 2 ? 'green' : 'red'}>
-                                    {selectedRecord.statusDesc}
-                                </Tag>
-                            </Descriptions.Item>
-                            <Descriptions.Item label="审核时间">{selectedRecord.auditTime || '未审核'}</Descriptions.Item>
-                            <Descriptions.Item label="审核备注" span={2}>{selectedRecord.auditRemark || '无'}</Descriptions.Item>
-                            {selectedRecord.rejectReason && (
-                                <Descriptions.Item label="拒绝原因" span={2}>
-                                    <Typography.Text type="danger">{selectedRecord.rejectReason}</Typography.Text>
-                                </Descriptions.Item>
-                            )}
-                            <Descriptions.Item label="创建时间">{selectedRecord.createdAt}</Descriptions.Item>
-                            <Descriptions.Item label="更新时间">{selectedRecord.updatedAt}</Descriptions.Item>
-                        </Descriptions>
-                    </div>
-                )}
+                <CertificationDetail selectedRecord={selectedRecord} />
             </Drawer>
 
             {/* 通过审核弹窗 */}
@@ -333,8 +195,8 @@ function Certification(props) {
                 onOk={handleOk}
                 onCancel={handleCancel}
             >
-                <div style={{display:'flex',alignItems:'center',gap:10}}>
-                    <InfoCircleFilled style={{color:'#ffa616'}} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <InfoCircleFilled style={{ color: '#ffa616' }} />
                     <p>您确定通过{ThroughId.length > 1 ? `这${ThroughId.length}个` : '这个'}认证申请吗？</p>
                 </div>
             </Modal>
@@ -350,14 +212,14 @@ function Certification(props) {
                 onCancel={handleCancelJuJue}
             >
                 <div>
-                    <div style={{display:'flex',alignItems:'center',gap:10}}>
-                        <InfoCircleFilled style={{color:'red'}} />
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <InfoCircleFilled style={{ color: 'red' }} />
                         <p>您确定拒绝这个认证申请吗？</p>
                     </div>
                     <Input.TextArea
-                        style={{marginTop:'10px'}}
+                        style={{ marginTop: '10px' }}
                         value={JujueContet}
-                        onChange={e=>setJujueContet(e.target.value)}
+                        onChange={e => setJujueContet(e.target.value)}
                         placeholder="请输入拒绝的理由(最多48个字)"
                         autoSize={{ minRows: 3, maxRows: 5 }}
                         maxLength={48}

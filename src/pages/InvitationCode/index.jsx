@@ -31,7 +31,8 @@ const InvitationCode = () => {
         try {
             const res = await getInvitationCodeList(params)
             console.log(res)
-            const { data: { list }, data: { total: totalCount } } = res
+            const { data: { list }, data: { totalCount } } = res
+            console.log('list', res)
             setTableData(list)
             setTotal(totalCount)
         } catch (error) {
@@ -123,6 +124,7 @@ const InvitationCode = () => {
 
     // 分页处理
     const handlePaginationChange = (page, pageSize) => {
+        console.log('分页变化:', page, pageSize)
         const newRequestData = {
             pageIndex: page,
             pageSize: pageSize
