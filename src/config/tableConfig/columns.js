@@ -238,12 +238,6 @@ const commercialTenantWithdrawal = [
     width: 120, // 金额列适中宽度
   },
   {
-    title: '提现渠道',
-    dataIndex: 'channel',
-    key: 'channel',
-    width: 100, // 图标列可以窄一些
-  },
-  {
     title: '状态',
     dataIndex: 'statusDesc',
     key: 'statusDesc',
