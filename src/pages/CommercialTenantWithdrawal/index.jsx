@@ -441,18 +441,18 @@ const CommercialTenantWithdrawal = () => {
           onChange={handleRefundNoChange}
           value={fromDate.refundNo}
         />
-        <Input
-          placeholder="请输入手机号"
-          style={{ width: '200px' }}
-          onChange={handlePhoneNumberChange}
-          value={fromDate.phoneNumber}
-        />
-        <Input
-          placeholder="请输入金额"
-          style={{ width: '200px' }}
-          onChange={handleMoneyChange}
-          value={fromDate.amount}
-        />
+        {/*<Input*/}
+        {/*  placeholder="请输入手机号"*/}
+        {/*  style={{ width: '200px' }}*/}
+        {/*  onChange={handlePhoneNumberChange}*/}
+        {/*  value={fromDate.phoneNumber}*/}
+        {/*/>*/}
+        {/*<Input*/}
+        {/*  placeholder="请输入金额"*/}
+        {/*  style={{ width: '200px' }}*/}
+        {/*  onChange={handleMoneyChange}*/}
+        {/*  value={fromDate.amount}*/}
+        {/*/>*/}
         <Button onClick={handleExportAll}>全部导出</Button>
         <Button
           onClick={handleExportCurrentPage}

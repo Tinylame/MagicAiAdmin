@@ -267,6 +267,9 @@ const Home = () => {
         )
     }
 
+    const onItemClick=(item)=>{
+        console.log(item)
+    }
 
     return (
         <div className={HomeStyle.Home}>
@@ -295,13 +298,13 @@ const Home = () => {
                     </div>
                 </div>
                 {modeConfigs.map((mode, modeIndex) => (
-                    <div key={modeIndex} className={HomeStyle.mode}>
+                    <div key={modeIndex} className={HomeStyle.mode} >
                         <div className={HomeStyle.modeTitle}>
                             <h1>{mode.title}</h1>{mode.icon}
                         </div>
                         <div className={HomeStyle.modeContent}>
                             {mode.items.map((item, itemIndex) => (
-                                <div key={itemIndex} className={HomeStyle.ContentMode}>
+                                <div key={itemIndex} className={HomeStyle.ContentMode} onClick={()=>onItemClick(item.title)}>
                                     <div className={HomeStyle.IconLift}>
                                         <h1>{item.title}</h1>
                                         <p><span style={{ fontSize: '40px' }}>{formatNumber(item.value)}</span>{item.unit}</p>
@@ -312,9 +315,6 @@ const Home = () => {
                         </div>
                     </div>
                 ))}
-                {/* <div className={HomeStyle.Ranking}>
-                    <Ranking />
-                </div> */}
 
             </div>
 
