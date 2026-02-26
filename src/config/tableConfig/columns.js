@@ -554,6 +554,97 @@ const certificateTable = [
     fixed: 'right',
   },
 ]
+
+//todo 关于首页展示的
+const user_total =[
+  {
+    title: '商户昵称',
+    dataIndex: 'nickName',
+    key: 'nickName',
+  },
+  {
+    title: '商户手机号',
+    dataIndex: 'phoneNumber',
+    key: 'phoneNumber',
+  },
+  {
+    title: '充值总金额',
+    dataIndex: 'totalAmount',
+    key: 'totalAmount',
+  },
+  {
+    title: '最新充值时间',
+    dataIndex: 'latestRechargeTime',
+    key: 'latestRechargeTime',
+  },
+]
+const published_video =[
+  {
+    title: '商户昵称',
+    dataIndex: 'nickName',
+    key: 'nickName',
+  },
+  {
+    title: '商户手机号',
+    dataIndex: 'phoneNumber',
+    key: 'phoneNumber',
+  },
+  {
+    title: '发布视频数量',
+    dataIndex: 'publishedCount',
+    key: 'publishedCount',
+  },
+  {
+    title: '发布日期',
+    dataIndex: 'publishDate',
+    key: 'publishDate',
+  },
+]
+const generated_video =[
+  {
+    title: '商户昵称',
+    dataIndex: 'nickName',
+    key: 'nickName',
+  },
+  {
+    title: '商户手机号',
+    dataIndex: 'phoneNumber',
+    key: 'phoneNumber',
+  },
+  {
+    title: '总发布视频数',
+    dataIndex: 'totalGenerated',
+    key: 'totalGenerated',
+  },
+  {
+    title: '发布日期',
+    dataIndex: 'createdAt',
+    key: 'createdAt',
+  },
+]
+const user_published =[
+  {
+    title: '用户昵称',
+    dataIndex: 'nickName',
+    key: 'nickName',
+  },
+  {
+    title: '用户手机号',
+    dataIndex: 'phoneNumber',
+    key: 'phoneNumber',
+  },
+  {
+    title: '发布视频数',
+    dataIndex: 'publishedCount',
+    key: 'publishedCount',
+  },
+  {
+    title: '发布日期',
+    dataIndex: 'publishDate',
+    key: 'publishDate',
+  },
+]
+
 export const TableConfig = {
   user,
   merchant,
@@ -565,4 +656,8 @@ export const TableConfig = {
   invoiceTable,
   certificateTable,
   commercialTenantWithdrawal,
+  user_total,
+  published_video,
+  generated_video,
+  user_published
 }

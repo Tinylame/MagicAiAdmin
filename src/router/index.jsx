@@ -18,6 +18,7 @@ import React from 'react'
 import InvitationCode from '@pages/InvitationCode'
 import Certification from '@pages/Certification'
 import CommercialTenantWithdrawal from '@pages/CommercialTenantWithdrawal'
+import HomeDataDisplay from '@/pages/HomeDataDisplay'
 
 // 包装组件，在组件挂载时显示进度条
 const withProgress = Component => {
@@ -53,8 +54,8 @@ const router = createHashRouter([
         element: React.createElement(withProgress(Home)),
       },
       {
-        path: '/conventional',
-        element: React.createElement(withProgress(Conventional)),
+        path: '/HomeDataDisplay',
+        element: React.createElement(withProgress(HomeDataDisplay)),
       },
       {
         path: '/cost',
@@ -67,6 +68,10 @@ const router = createHashRouter([
       {
         path: '/permission',
         element: React.createElement(withProgress(Permission)),
+      },
+      {
+        path: '/conventional',
+        element: React.createElement(withProgress(Conventional)),
       },
       {
         path: '/recharge',

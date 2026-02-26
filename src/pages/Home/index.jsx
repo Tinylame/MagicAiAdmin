@@ -3,7 +3,6 @@ import { useEffect, useState, useCallback } from "react";
 import { Homes } from '@/api/'
 import { YahooFilled } from '@ant-design/icons'
 import { Space, Spin } from 'antd';
-import Ranking from '@/components/Ranking'
 import teDay from '@/assets/svg/Home/teDay.svg'
 import ShangHu from '@/assets/svg/Home/ShangHu.svg'
 import tadayUser from '@/assets/svg/Home/tadayUser.svg'
@@ -29,6 +28,7 @@ import BshengC from '@/assets/svg/Home/BshengC.svg'
 import CshengC from '@/assets/svg/Home/CshengC.svg'
 import FaBu from '@/assets/svg/Home/FaBu.svg'
 import AvatarS from '@/components/DailyActive/index.jsx'
+import { useNavigate } from 'react-router-dom';
 
 // 格式化数字函数：大于等于10000显示为"万"的形式
 const formatNumber = (num) => {
@@ -45,6 +45,7 @@ const formatNumber = (num) => {
 };
 
 const Home = () => {
+    const navigate = useNavigate()
     const [homeData, setHomeData] = useState(null)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
@@ -268,7 +269,10 @@ const Home = () => {
     }
 
     const onItemClick=(item)=>{
-        console.log(item)
+        const toList =['用户充值金额','总生成视频数','今日用户发布视频数','今日商家发布视频数']
+        if (toList.includes(item)){
+            navigate(`/HomeDataDisplay?title=${item}`)
+        }
     }
 
     return (
