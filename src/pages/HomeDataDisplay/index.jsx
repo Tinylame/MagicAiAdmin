@@ -10,7 +10,7 @@ const { RangePicker } = DatePicker;
 
 const HomeDataDiaPlay =()=>{
     const [pageIndex, setPageIndex] = useState(1);
-    const [pageSize, setPageSize] = useState(3);
+    const [pageSize, setPageSize] = useState(20);
     const [sortOrder, setSortOrder] = useState(0);
     const [dateRange, setDateRange] = useState(null);
     const [totalCount,setTotalCount] = useState(0);
