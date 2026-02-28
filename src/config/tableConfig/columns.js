@@ -496,6 +496,18 @@ const invoiceTable = [
 ]
 
 const certificateTable = [
+  // {
+  //   title: '用户名',
+  //   dataIndex: 'userName',
+  //   key: 'userName',
+  //   fixed: 'left',
+  // },
+  {
+    title: '手机号',
+    dataIndex: 'phoneNumber',
+    key: 'phoneNumber',
+    fixed: 'left',
+  },
   {
     title: '商户id',
     dataIndex: 'businessId',
@@ -556,7 +568,7 @@ const certificateTable = [
 ]
 
 //todo 关于首页展示的
-const user_total =[
+const user_total = [
   {
     title: '商户昵称',
     dataIndex: 'nickName',
@@ -578,7 +590,7 @@ const user_total =[
     key: 'latestRechargeTime',
   },
 ]
-const published_video =[
+const published_video = [
   {
     title: '商户昵称',
     dataIndex: 'nickName',
@@ -600,7 +612,7 @@ const published_video =[
     key: 'publishDate',
   },
 ]
-const generated_video =[
+const generated_video = [
   {
     title: '商户昵称',
     dataIndex: 'nickName',
@@ -622,7 +634,7 @@ const generated_video =[
     key: 'createdAt',
   },
 ]
-const user_published =[
+const user_published = [
   {
     title: '用户昵称',
     dataIndex: 'nickName',
@@ -659,5 +671,5 @@ export const TableConfig = {
   user_total,
   published_video,
   generated_video,
-  user_published
+  user_published,
 }
